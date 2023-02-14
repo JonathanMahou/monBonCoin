@@ -80,6 +80,31 @@ class AnnoncesModel extends Db
     }
 
 //////////////////////////UPDATE///////////////////////////////
+/**
+ * Méthode de mise à jour d'une annonce 
+ * @param array $data[
+ * id Categorie int
+ * 
+ * 
+ * 
+ * ]
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+
+
+
+
+ */
+
+
+
+
 
     public static function update(array $data){
         $request = "UPDATE annonces SET idCategorie=?, title = ?, description = ?, price = ?, image = ? WHERE idAnnonce = ?";
