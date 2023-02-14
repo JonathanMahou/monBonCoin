@@ -45,6 +45,7 @@ class AnnoncesModel extends Db
 
         return $response->fetch(PDO::FETCH_ASSOC);
     }
+    
 
     //Méthode pour trouver toutes les annonces d'un user
     public static function findByUser($idUser)
@@ -83,23 +84,13 @@ class AnnoncesModel extends Db
 /**
  * Méthode de mise à jour d'une annonce 
  * @param array $data[
- * id Categorie int
- * 
- * 
- * 
+ * id Categorie int, 
+ * title : string,
+ * description: string,
+ * prince: int,
+ * image: string,
+ * idAnnonce: int,
  * ]
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
-
-
-
-
  */
 
 
