@@ -1,6 +1,9 @@
 <?php
 namespace App;
 
+use Controllers\AnnoncesController;
+use Controllers\Controller;
+
 class Routeur{
     public function app(){
         //On test le routeur
@@ -12,7 +15,7 @@ class Routeur{
         // On supprime "/monboncoin/public" de $request
         $nb = strlen(SITEBASE);
         $request = substr($request, $nb);
-        echo "<hr>";
+        // echo "<hr>";
         echo $request;
         // On casse $request pour récupérer uniquement la route demandé et pas les aram GET
         $request = explode("?", $request);
@@ -23,6 +26,7 @@ class Routeur{
         switch ($request){
             case '':
                 echo "Vous êtes sur la page d'accueil";
+                $accueil = AnnoncesController::accueil();
                 break;
             case 'annonces':
                 echo "Vous etes sur la page TOTO";

@@ -11,7 +11,7 @@ $config = file_get_contents('../App/config.json');
 $config = json_decode($config);
 $config->baseSite;
 define("SITEBASE", $config->baseSite);
-// echo SITEBASE;
+//echo SITEBASE;
 
 // echo "<hr>";
 
