@@ -5,6 +5,6 @@
         "password" : "",
         "host" : "localhost",
         
-    "baseSite" : "localhost/monBonCoin/public/"
+    "baseSite" : "/monBonCoin/public/"
 
 }
