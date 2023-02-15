@@ -29,7 +29,13 @@ class Routeur{
                 $accueil = AnnoncesController::accueil();
                 break;
             case 'annonces':
-                echo "Vous etes sur la page TOTO";
+                // echo "Vous etes sur la page TOTO";
+                if (isset($_GET['order']) && isset ($_GET['idCategorie'])) {
+                    $order = $_GET['order'];
+                    $categorie = $_GET['idCategorie'];
+                    AnnoncesController::annonces($order, $categorie);
+                }
+                AnnoncesController::annonces();
                 break;
             case 'annonceDetail':
                 // echo "Vous êtes sur la page de l'annonce";

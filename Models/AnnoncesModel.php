@@ -19,7 +19,7 @@ class AnnoncesModel extends Db
         // }
 
         //AUTRE MANIERE PLUS PROPRE
-         $request = "SELECT * ,annonces.title AS title, categories.title AS NameCat FROM annonces INNER JOIN categories ON annonces.idCategorie = categories.idCategorie";
+         $request = "SELECT * ,annonces.title AS title, categories.title AS nameCat FROM annonces INNER JOIN categories ON annonces.idCategorie = categories.idCategorie";
         // if($order !==null){
         //     $request .= " ORDER BY " . $order;
         // }
@@ -58,9 +58,9 @@ class AnnoncesModel extends Db
     }
 
     //Méthode pour trouver les annonces d'une catégorie 
-    public static function findByCat($idCategorie)
+    public static function findByCat($idCategorie, $order = null)
     {
-        $request = "SELECT * FROM annonces WHERE idCategorie = ?";
+        $request = "SELECT *, annonces.title AS title, categories.title AS nameCat FROM annonces INNER JOIN categories ON annonces.idCategorie = categories.idCategorie WHERE annonces.idCategorie = ?";
         $response = self::getDb()->prepare($request);
         $response->execute($idCategorie);
 

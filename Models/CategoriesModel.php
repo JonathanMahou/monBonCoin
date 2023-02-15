@@ -18,7 +18,7 @@ class CategoriesModel extends Db
         $response = self::getDb()->prepare($request);
         $response->execute();
 
-        return $response->fetch(PDO::FETCH_ASSOC);
+        return $response->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //Trouver une catégorie par son id
