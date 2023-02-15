@@ -46,13 +46,16 @@
             </div>
         </div>
     </nav>
-    <!-- Titre dynamique -->
-    <h1 class="m-5 text-center"><?= $title ?></h1>
-    <!-- Ici nous récupérons les données à afficher -->
-    <div class="container">
-        <?= $content;  // Affichage des données ?>
-    </div>
+    <main>
+        <!-- Titre dynamique -->
+        <h1 class="m-5 text-center"><?= $title ?></h1>
+        <!-- Ici nous récupérons les données à afficher -->
+        <div class="container">
+            <?= $content;  // Affichage des données 
+            ?>
+        </div>
 
+    </main>
 
 
     <footer>Jonathan &copy; 2023</footer>

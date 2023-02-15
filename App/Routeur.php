@@ -25,14 +25,19 @@ class Routeur{
         //On définit les routes du projet
         switch ($request){
             case '':
-                echo "Vous êtes sur la page d'accueil";
+                // echo "Vous êtes sur la page d'accueil";
                 $accueil = AnnoncesController::accueil();
                 break;
             case 'annonces':
                 echo "Vous etes sur la page TOTO";
                 break;
             case 'annonceDetail':
-                echo "Vous êtes sur la page de l'annonce";
+                // echo "Vous êtes sur la page de l'annonce";
+                if (isset($_GET['id'])){
+                    $id = (int)$_GET['id'];
+                    AnnoncesController::detail($id);
+                }
+                
                 break;
             case 'annonceAjout':
                 echo "page création d'annonce";
