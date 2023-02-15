@@ -20,6 +20,14 @@ class Controller{
     }
 
 
+        public static function security(){
+            if (!empty($_POST)){
+                foreach ($_POST as $key => $value) {
+                    htmlspecialchars(trim($value));
+                }
+            }
+        }
+
     //test
 //     public function test(){
 //         $this->render('test', [

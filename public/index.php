@@ -7,6 +7,7 @@
 
 use App\Routeur;
 
+session_start();
 $config = file_get_contents('../App/config.json');
 $config = json_decode($config);
 $config->baseSite;
