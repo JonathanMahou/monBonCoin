@@ -7,6 +7,9 @@ h1{
     width: 500px;
 }
 
+.logo{
+    width: 55px;
+}
 
 .grow{
     transition: all .2s ease-in-out;

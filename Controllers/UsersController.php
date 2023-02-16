@@ -88,7 +88,7 @@ class UsersController extends Controller{
                     $_SESSION['messages'] = "Salut, content de vous revoir";
                     $_SESSION['user'] = [
                         'role' => $user['role'],
-                        'id' => $user['id'],
+                        'id' => $user['idUser'],
                         'firstName' => $user['firstName'],
                         'login' => $user['login']
                     ];

@@ -21,7 +21,11 @@
                 <option value="">Toutes les catégorie</option>
 
                 <?php foreach ($categories as $categorie) : ?>
-                    <option value="<?= $categorie['idCategorie'] ?>"><?= ucfirst($categorie['title']) ?></option>
+                    <?php if(!empty($_GET)) : ?>
+                    <option value="<?= $categorie['idCategorie'] ?>" <?= $_GET['idCategorie'] == $categorie['idCategorie'] ? "selected" :null ?>><?= ucfirst($categorie['title']) ?></option>
+                    <?php else : ?>
+                        <option value="<?= $categorie['idCategorie'] ?>"><?= ucfirst($categorie['title']) ?></option>    
+                    <?php endif ?>
                 <?php endforeach ?>
             </select>
         </div>
