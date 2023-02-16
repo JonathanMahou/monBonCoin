@@ -1,8 +1,8 @@
 <?php
 // var_dump($annonces);
-if (isset($_SESSION['message'])){
-    $message = $_SESSION['message'];
-    unset($_SESSION['message']);
+if (isset($_SESSION['messages'])){
+    $message = $_SESSION['messages'];
+    unset($_SESSION['messages']);
 
     echo '<div class="alert alert-dismissible alert-warning">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

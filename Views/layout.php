@@ -28,19 +28,21 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="annonces">Toutes les annonces
-                            <span class="visually-hidden">(current)</span>
+                        <a class="nav-link" href="annonces">Toutes les annonces
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <li class="nav-item"><a href="annonceAjout" class="btn btn-secondary">Nouvel Annonce</a></li>
+                        <li class="nav-item"><a href="profil" class="btn btn-secondary">Profil</a></li>
+                        <li class="nav-item"><a href="deconnexion" class="btn btn-secondary">Deconnexion</a></li>
+                    <?php else : ?>
+                        <li class="nav-item"><a href="connexion" class="btn btn-secondary">Connexion</a></li>
+                    <?php endif ?>
+                    <?php if(!isset($SESSION['panier'])) : ?>
+                        <li class="nav-item"><a href="panier?opp=affiche" class="btn btn-secondary"> <i class="bi bi-cart"></i> </a></li>
+                    <?php endif ?>    
                 </ul>
 
             </div>

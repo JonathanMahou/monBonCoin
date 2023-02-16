@@ -27,7 +27,7 @@ class UsersController extends Controller{
 ) {
 
 
-    if(!filter_var($_POST ['email'], FILTER_VALIDATE_EMAIL)){
+    if(!filter_var($_POST ['login'], FILTER_VALIDATE_EMAIL)){
         $errMsg = "Merci de saisir un email valide<br>";
     }
     if(!preg_match($pattern, $_POST['password'])){
@@ -37,7 +37,7 @@ class UsersController extends Controller{
         //Tout est ok
         $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
         //On verifie que l'email soit pas déja en BDD
-        $login = [$_POST['email']];
+        $login = [$_POST['login']];
         $testLogin = UsersModel::findByLogin($login);
         if($testLogin){
             $errMsg = "Vous avez déja un compte";
@@ -45,7 +45,7 @@ class UsersController extends Controller{
             // on enregistre en BDD
             //On sécurise les données 
             self::security();
-            $data = [$_POST['email'],
+            $data = [$_POST['login'],
             $pass, $_POST['firstName'], 
             $_POST['lastName'], 
             $_POST['adress'], 
@@ -53,7 +53,7 @@ class UsersController extends Controller{
             $_POST['city']];
             UsersModel::create($data);
             $_SESSION['message'] = "Votre comtpe est crée, vous pouvez vous connecter";
-            header('location: ' . SITEBASE); 
+            header('location: connexion'); 
         }
     }
 
@@ -63,6 +63,47 @@ class UsersController extends Controller{
 }
         self::render('users/inscription', [
             'title' => 'Inscription',
+            'errMsg' => $errMsg
+        ]);
+    }
+
+
+    //Méthode de connexion 
+    public static function connexion (){
+        $errMsg = "";
+
+        //Traitement du formulaire
+        if(!empty($_POST['login']) && !empty($_POST['password'])){
+            //On sécurise la saisie
+            self::security();
+            $login = $_POST['login'];
+            //On verifie que l'utilisateur soit présent en BDD
+            $user = UsersModel::findByLogin([$login]);
+            if (!$user) {
+                $errMsg = "Login ou mot de passe incorrect";
+            }else{
+                $pass = $_POST['password'];
+                if (password_verify($pass, $user['password'])) {
+                    //Enregistre des infos de l'utilisateur en session
+                    $_SESSION['messages'] = "Salut, content de vous revoir";
+                    $_SESSION['user'] = [
+                        'role' => $user['role'],
+                        'id' => $user['id'],
+                        'firstName' => $user['firstName'],
+                        'login' => $user['login']
+                    ];
+                    //Redirection vers la page d'accueil
+                    header('Location: ' . SITEBASE);
+                }else{
+                    $errMsg = "Login ou mot de passe incorrect";
+                }
+            }
+        }elseif(!empty($_POST)){
+            $errMsg = "Merci de remplir tous les champs";
+        }
+
+        self::render ('users/connexion', [
+            'title' => 'connexion',
             'errMsg' => $errMsg
         ]);
     }
