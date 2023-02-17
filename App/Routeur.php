@@ -1,12 +1,15 @@
 <?php
+
 namespace App;
 
 use Controllers\AnnoncesController;
 use Controllers\Controller;
 use Controllers\UsersController;
 
-class Routeur{
-    public function app(){
+class Routeur
+{
+    public function app()
+    {
         //On test le routeur
         // echo "le retour fonctionne";
 
@@ -17,21 +20,21 @@ class Routeur{
         $nb = strlen(SITEBASE);
         $request = substr($request, $nb);
         // echo "<hr>";
-        echo $request;
+        // echo $request;
         // On casse $request pour récupérer uniquement la route demandé et pas les aram GET
         $request = explode("?", $request);
         $request = $request[0];
         // echo $request;
 
         //On définit les routes du projet
-        switch ($request){
+        switch ($request) {
             case '':
                 // echo "Vous êtes sur la page d'accueil";
                 $accueil = AnnoncesController::accueil();
                 break;
             case 'annonces':
                 // echo "Vous etes sur la page TOTO";
-                if (isset($_GET['order']) && isset ($_GET['idCategorie'])) {
+                if (isset($_GET['order']) && isset($_GET['idCategorie'])) {
                     $order = $_GET['order'];
                     $categorie = $_GET['idCategorie'];
                     AnnoncesController::annonces($order, $categorie);
@@ -40,11 +43,11 @@ class Routeur{
                 break;
             case 'annonceDetail':
                 // echo "Vous êtes sur la page de l'annonce";
-                if (isset($_GET['id'])){
+                if (isset($_GET['id'])) {
                     $id = (int)$_GET['id'];
                     AnnoncesController::detail($id);
                 }
-                
+
                 break;
             case 'annonceAjout':
                 // echo "page création d'annonce";
@@ -55,14 +58,28 @@ class Routeur{
                 if (isset($_SESSION['user'])) {
                     $id = (int)$_GET['id'];
                     $updateAnnonce = AnnoncesController::annonceModif($id);
-                }else{
+                } else {
                     header('Location: connexion');
                 }
-                
+
                 break;
+            
+            case 'confirmSupp':
+                $id = $_GET['id'];
+                AnnoncesController::confirmSupp($id);
+                break;
+
             case 'annonceSupp':
                 echo "page de suppression d'annonce";
+                if (isset($_SESSION['user'])) {
+                    $id = [(int)$_GET['id']];
+                    $annonceSupp = AnnoncesController::annonceSupp($id);
+
+                    }else{
+                        header('Location: connexion');
+                }
                 break;
+                
             case 'panier':
                 echo "page panier";
                 break;
@@ -80,7 +97,12 @@ class Routeur{
                 header('location:  ' . SITEBASE);
                 break;
             case 'profil':
-                echo "page de profil";
+                // echo "page de profil";
+                if (isset($_SESSION['user'])) {
+                    $profil = UsersController::profil();
+                } else {
+                    header('Location: connexion');
+                }
                 break;
             default:
                 echo "cette page n'existe pas";

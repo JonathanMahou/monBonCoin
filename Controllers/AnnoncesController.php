@@ -174,4 +174,18 @@ class AnnoncesController extends Controller
 
         ]);
     }
+
+    //Méthode de suppression d'annonce 
+    public static function annonceSupp($id){
+        AnnoncesModel::delete($id);
+        header('Location: profil');
+        $_SESSION['messages'] = 'annonce supprimé';
+    }
+
+    public static function confirmSupp($id){
+        self::render('annonces/suppression', [
+            'title' => 'Confirmation de suppression d\'annonce',
+            'id' => $id
+        ]);
+    }
 }
