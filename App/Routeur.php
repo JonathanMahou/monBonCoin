@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Controllers\AnnoncesController;
 use Controllers\Controller;
 use Controllers\UsersController;
+use Controllers\PanierController;
+use Controllers\AnnoncesController;
 
 class Routeur
 {
@@ -63,7 +64,7 @@ class Routeur
                 }
 
                 break;
-            
+
             case 'confirmSupp':
                 $id = $_GET['id'];
                 AnnoncesController::confirmSupp($id);
@@ -74,14 +75,45 @@ class Routeur
                 if (isset($_SESSION['user'])) {
                     $id = [(int)$_GET['id']];
                     $annonceSupp = AnnoncesController::annonceSupp($id);
-
-                    }else{
-                        header('Location: connexion');
+                } else {
+                    header('Location: connexion');
                 }
                 break;
-                
+
             case 'panier':
-                echo "page panier";
+                // echo "page panier";
+                // Trois operations possible : Ajouter/Supprimer/Voir
+                switch ($_GET['operation']) {
+                    case 'ajouter':
+
+                        if (
+                            isset($_GET['id']) &&
+                            isset($_GET['title']) &&
+                            isset($_GET['price']) &&
+                            isset($_GET['photo'])
+                        ) {
+
+                            PanierController::ajouter($_GET['id'], $_GET['title'], $_GET['price'], $_GET['photo']);
+
+                            # code...
+                        }
+                        break;
+
+                    case 'supprimer':
+                        if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            PanierController::supprimer($id);
+                        }
+                        break;
+
+                    case 'voir':
+                        PanierController::voir();
+                        break;
+
+                    default:
+                        header('Location: ' . SITEBASE);
+                        break;
+                }
                 break;
             case 'inscription':
                 // echo "page d'inscription";

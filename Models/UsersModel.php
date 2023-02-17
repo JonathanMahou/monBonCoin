@@ -30,14 +30,14 @@ class UsersModel extends Db
      */
 
 
-    // public static function findById(array $id)
-    // {
-    //     $request = "SELECT * FROM users WHERE idUser = ?";
-    //     $response = self::getDb()->prepare($request);
-    //     $response->execute($id);
+    public static function findById(array $id)
+    {
+        $request = "SELECT * FROM users WHERE idUser = ?";
+        $response = self::getDb()->prepare($request);
+        $response->execute($id);
 
-    //     return $response->fetch(PDO::FETCH_ASSOC);
-    // }
+        return $response->fetch(PDO::FETCH_ASSOC);
+    }
 
     //Trouver un utilisateur par son login
     /**

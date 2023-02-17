@@ -40,8 +40,8 @@
                     <?php else : ?>
                         <li class="nav-item"><a href="connexion" class="btn btn-secondary">Connexion</a></li>
                     <?php endif ?>
-                    <?php if(!isset($SESSION['panier'])) : ?>
-                        <li class="nav-item"><a href="panier?opp=affiche" class="btn btn-secondary"> <i class="bi bi-cart"></i> </a></li>
+                    <?php if(isset($_SESSION['panier'])) : ?>
+                        <li class="nav-item"><a href="panier?operation=voir" class="btn btn-secondary"> <i class="bi bi-cart"></i> <span class="small"><?= count($_SESSION['panier']) ?></span></a></li>
                     <?php endif ?>    
                 </ul>
 
